@@ -14,7 +14,7 @@ class TodoForm extends StatelessWidget {
   final String description;
   final ValueChanged<String> onChangedTitle;
   final ValueChanged<String> onChangedDescription;
-  final Function onSaved;
+  final VoidCallback onSaved;
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +77,7 @@ class TodoForm extends StatelessWidget {
             width: double.infinity,
             height: 40,
             child: ElevatedButton(
-                onPressed: onSaved(),
+                onPressed: onSaved,
                 child: const Text('Save', style: TextStyle(
                   color: Colors.white,
                   fontFamily: 'CrimsonText',

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/Classes/todo_list.dart';
+import 'package:todo_app/Widgets/add_todo.dart';
+import 'package:todo_app/Widgets/completed_list.dart';
+import 'package:todo_app/Widgets/todo_list.dart';
 
-import '../Classes/add_todo.dart';
 import '../Constants/constants.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -20,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
       //appears todos
       const TodoList(),
       //appears completed todos
-      Container(),
+      const CompletedList(),
     ];
     return Scaffold(
       appBar: AppBar(
