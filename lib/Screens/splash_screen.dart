@@ -1,7 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:todo_app/constants.dart';
-import 'package:todo_app/login.dart';
+import 'package:todo_app/Constants/constants.dart';
+import 'package:todo_app/Screens/login.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);

@@ -4,9 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/material.dart';
-import 'package:todo_app/constants.dart';
-import 'package:todo_app/home_screen.dart';
-import 'package:todo_app/login.dart';
+import 'package:todo_app/Constants/constants.dart';
+import 'package:todo_app/Screens/home_screen.dart';
+import 'package:todo_app/Screens/login.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -83,7 +83,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     padding: const EdgeInsets.only(left: 20.0, right: 20, bottom: 20),
                     child: TextFormField(
                         validator: (val){
-                          if (val!.isNotEmpty) {
+                          if (val!.isEmpty) {
                             return 'Please enter email address';
                           } else if (!val.contains('@')) {
                             return 'Email Address should be valid';
