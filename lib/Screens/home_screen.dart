@@ -1,7 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_app/API%20Services/firebase_api.dart';
+import 'package:todo_app/Provider/todos.dart';
 import 'package:todo_app/Widgets/add_todo.dart';
 import 'package:todo_app/Widgets/completed_list.dart';
 import 'package:todo_app/Widgets/todo_list.dart';
+import 'package:todo_app/model/todo_model.dart';
 
 import '../Constants/constants.dart';
 
@@ -62,8 +67,39 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         backgroundColor: color2,
       ),
-      body: tabs[selectedIndex],
+
+      //using stream builder to get the todos from the server
+      body: Column(
+        children: [
+          StreamBuilder<List<TodoModel>>(
+            stream: FirebaseApi.readTodos(),
+            builder: (context, snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.waiting:
+                  return const Center(child: CircularProgressIndicator());
+                default:
+                  if (snapshot.hasError) {
+                    return buildText('Something Went Wrong Try later');
+                  } else {
+                    final todos = snapshot.data;
+
+                    final provider = Provider.of<TodoProvider>(context);
+                    provider.setTodos(todos!);
+
+                    return tabs[selectedIndex];
+                  }
+              }
+            },
+          ),
+        ],
+      ),
 
     );
   }
+  Widget buildText(String text) => Center(
+    child: Text(
+      text,
+      style: const TextStyle(fontSize: 24, color: Colors.white),
+    ),
+  );
 }

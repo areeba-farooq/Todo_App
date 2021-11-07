@@ -1,34 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:todo_app/API%20Services/firebase_api.dart';
 import 'package:todo_app/model/todo_model.dart';
 
 class TodoProvider extends ChangeNotifier {
-  final List<TodoModel> _todoList = [ //private
-    TodoModel(
-        createdTime: DateTime.now(),
-        title: 'Buy Food',
-        description: '-Eggs\n-Milk\n-Bread\n-Oil'
-    ),
-    TodoModel(
-        createdTime: DateTime.now(),
-        title: 'Read a book',
-        description: '2 Pages today'
-    ),
-    TodoModel(
-        createdTime: DateTime.now(),
-        title: 'Parlour appointment',
-        description: 'Saturday at 5 pm'
-    ),
-    TodoModel(
-        createdTime: DateTime.now(),
-        title: 'Go for a walk',
-        description: 'Daily 2km at 4 pm'
-    ),
-    TodoModel(
-        createdTime: DateTime.now(),
-        title: 'Shopping List',
-        description: '-Watch\n-Rings pack\n-2 casual dresses\n-nail paints'
-    ),
-  ];
+  List<TodoModel> _todoList = [];
 
 //to make this public,
 // so we created a getter => go over all of our _Todos and filter them,
@@ -39,13 +15,18 @@ class TodoProvider extends ChangeNotifier {
   List<TodoModel> get todosCompleted =>
       _todoList.where((todoL) => todoL.isDone == true).toList();
 
-  //adding todos method
-  void addTodo(TodoModel newTodo) {
-    _todoList.add(newTodo); //adding user todos to todoList
 
+
+  
+  //adding todos method
+  //this will stored our todos data locally and within firebase as well
+  void addTodo(TodoModel newTodo) => FirebaseApi.createTodo(newTodo);
+
+    // _todoList.add(newTodo); adding user todos to todoList
+    //
     //by calling this our provider need to update our UI
-    notifyListeners();
-  }
+    // notifyListeners();
+  
 
   //removing todos method
   void removeTodo(TodoModel todo) {
@@ -67,5 +48,12 @@ class TodoProvider extends ChangeNotifier {
 
     //to update this in our UI
     notifyListeners();
+  }
+
+  void setTodos(List<TodoModel> todos) {
+    WidgetsBinding.instance!.addPostFrameCallback((_){
+      _todoList = todos;
+      notifyListeners();
+    });
   }
 }

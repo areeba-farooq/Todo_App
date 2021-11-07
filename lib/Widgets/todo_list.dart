@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:todo_app/Constants/constants.dart';
 import 'package:todo_app/Provider/todos.dart';
 import 'package:todo_app/Screens/edit_todo_screen.dart';
-import 'package:todo_app/Widgets/completed_list.dart';
 import 'package:todo_app/Widgets/utils.dart';
 
 import '../model/todo_model.dart';

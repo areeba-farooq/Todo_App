@@ -17,13 +17,15 @@ class _CompletedListState extends State<CompletedList> {
     final provider = Provider.of<TodoProvider>(context);
     final todos = provider.todosCompleted;
     return todos.isEmpty?
-    const Center(
-      child: Text('No Completed tasks!', style: TextStyle(
-          color: color1,
-          fontWeight: FontWeight.w500,
-          fontFamily: 'CrimsonText',
-          fontSize: 25
-      ),),
+    const Scaffold(
+      body: Center(
+        child: Text('No Completed tasks!', style: TextStyle(
+            color: color1,
+            fontWeight: FontWeight.w500,
+            fontFamily: 'CrimsonText',
+            fontSize: 25
+        ),),
+      ),
     )
         :
     ListView.separated(

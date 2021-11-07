@@ -5,7 +5,7 @@ import 'package:todo_app/Screens/splash_screen.dart';
 
 import 'Provider/todos.dart';
 
-void main() async {
+Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const TodoApp());
